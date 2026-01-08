@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Menu</title>
+<link rel="stylesheet" href="css/app.css"/>
+</head>
+<body>
+
+<header class="app-header">
+  <button onclick="history.back()">←</button>
+  <h3 id="rest-name"></h3>
+</header>
+
+<main class="page">
+  <section id="menu-list"></section>
+</main>
+
+<div id="cart-preview" class="cart-preview hidden"></div>
+<div id="cartBar" class="cart-bar hidden">
+  <div class="cart-info">
+    <span id="cartCount">0 items</span>
+    <strong id="cartTotal">₹0</strong>
+  </div>
+  <button id="viewCartBtn">View Cart</button>
+</div>
+<script src="js/data.js"></script>
+<script src="js/state.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/restaurant.js"></script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Checkout • NewaiEats</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <link rel="stylesheet" href="css/checkout.css" />
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="checkout-header">
+  <i class="fa-solid fa-arrow-left" onclick="history.back()"></i>
+  <h2>Checkout</h2>
+</header>
+
+<main class="checkout-page">
+
+  <!-- ADDRESS CARD -->
+  <section class="card address-card">
+    <div class="card-title">
+      <i class="fa-solid fa-location-dot"></i>
+      <span>Delivery Address</span>
+    </div>
+
+    <textarea id="address" placeholder="House no, street, landmark, area"></textarea>
+
+    <button class="ghost-btn" id="detectLocation">
+      <i class="fa-solid fa-crosshairs"></i> Use current location
+    </button>
+  </section>
+
+  <!-- ITEMS -->
+  <section class="card">
+    <div class="card-title">
+      <i class="fa-solid fa-bag-shopping"></i>
+      <span>Your Items</span>
+    </div>
+
+    <div id="cartItems"></div>
+  </section>
+
+  <!-- PAYMENT -->
+  <section class="card">
+    <div class="card-title">
+      <i class="fa-solid fa-credit-card"></i>
+      <span>Payment Method</span>
+    </div>
+
+    <label class="payment-option active">
+      <input type="radio" name="payment" value="COD" checked />
+      <span>Cash on Delivery</span>
+    </label>
+
+    <label class="payment-option">
+      <input type="radio" name="payment" value="UPI" />
+      <span>UPI / Online</span>
+    </label>
+  </section>
+
+  <!-- BILL -->
+  <section class="card bill-card">
+    <div class="row">
+      <span>Item Total</span>
+      <span id="itemTotal">₹0</span>
+    </div>
+    <div class="row">
+      <span>Delivery Fee</span>
+      <span>₹50</span>
+    </div>
+    <hr />
+    <div class="row total">
+      <span>Grand Total</span>
+      <span id="grandTotal">₹0</span>
+    </div>
+  </section>
+
+</main>
+
+<!-- STICKY ORDER BAR -->
+<div class="place-order-bar">
+  <div class="price">
+    <strong id="bottomTotal">₹0</strong>
+    <span>Total payable</span>
+  </div>
+  <button id="placeOrder">Place Order</button>
+</div>
+
+<!-- SUCCESS OVERLAY -->
+<div id="successOverlay" class="success-overlay hidden">
+  <div class="success-box">
+    <div class="checkmark">✓</div>
+    <h2>Order Placed!</h2>
+    <p>Your food will arrive in<br><strong>30 minutes</strong></p>
+    <span id="orderIdText"></span>
+  </div>
+</div>
+
+<script src="js/cart.js"></script>
+<script src="js/checkout.js"></script>
+</body>
+</html>

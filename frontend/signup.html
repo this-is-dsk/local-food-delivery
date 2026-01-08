@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Account • Dilivery</title>
+  <link rel="stylesheet" href="css/auth.css" />
+</head>
+<body>
+
+  <div class="auth-wrapper">
+    <div class="auth-card">
+      <h1>Create account 🥗</h1>
+      <p class="subtitle">Sign up to start ordering food</p>
+
+      <div class="input-group">
+        <label>Name</label>
+        <input id="name" placeholder="Your name" />
+      </div>
+
+      <div class="input-group">
+        <label>Email</label>
+        <input id="email" placeholder="you@example.com" />
+      </div>
+
+      <div class="input-group">
+        <label>Password</label>
+        <input id="password" type="password" placeholder="••••••••" />
+      </div>
+
+      <div class="input-group">
+        <label>Phone</label>
+        <input id="phone" placeholder="9999999999" />
+      </div>
+
+      <button id="signupBtn">Create Account</button>
+
+      <p class="footer-text">
+  Already have an account?
+  <span onclick="goToLogin()">Login</span>
+</p>
+
+    </div>
+  </div>
+
+  <script src="js/signup.js"></script>
+</body>
+</html>
