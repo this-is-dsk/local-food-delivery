@@ -1,3 +1,5 @@
+const API_URL = "https://local-food-delivery-pxqv.onrender.com";
+
 const token = localStorage.getItem("token");
 if (!token) location.href = "/login.html";
 
@@ -27,41 +29,48 @@ async function fetchAdmin() {
   const headers = { Authorization: `Bearer ${token}` };
 
   // DASHBOARD
-  const dash = await fetch("/api/admin/dashboard", { headers }).then(r => r.json());
-  usersCount.textContent = dash.users ?? 0;
-  ordersCount.textContent = dash.orders ?? 0;
+  const dash = await fetch(
+    `${API_URL}/api/admin/dashboard`,
+    { headers }
+  ).then(r => r.json());
+
+  usersCount.textContent = dash.users || 0;
+  ordersCount.textContent = dash.orders || 0;
 
   // USERS
-  const users = await fetch("/api/admin/users", { headers }).then(r => r.json());
+  const users = await fetch(
+    `${API_URL}/api/admin/users`,
+    { headers }
+  ).then(r => r.json());
+
   usersTable.innerHTML = users.map(u => `
     <tr>
       <td>${u.name || "-"}</td>
       <td>${u.email || "-"}</td>
       <td>${u.phone || "-"}</td>
-      <td>${u.createdAt ? new Date(u.createdAt).toLocaleDateString() : "-"}</td>
+      <td>${new Date(u.createdAt).toLocaleDateString()}</td>
     </tr>
   `).join("");
 
-  // ORDERS (🔥 SAFE RENDER)
-  const orders = await fetch("/api/admin/orders", { headers }).then(r => r.json());
+  // ORDERS
+  const orders = await fetch(
+    `${API_URL}/api/admin/orders`,
+    { headers }
+  ).then(r => r.json());
 
-  ordersTable.innerHTML = orders.map(o => {
-    const itemsText = Array.isArray(o.items)
-      ? o.items.map(i => `${i.qty || 1}×${i.name || "Item"}`).join(", ")
-      : "-";
-
-    return `
-      <tr>
-        <td>#${o._id?.slice(-6) || "-"}</td>
-        <td>${o.user?.name || "-"}</td>
-        <td>${o.user?.phone || "-"}</td>
-        <td>${o.address || "-"}</td>
-        <td>${itemsText}</td>
-        <td>${o.paymentMethod || "-"}</td>
-        <td>${o.status || "Placed"}</td>
-      </tr>
-    `;
-  }).join("");
+  ordersTable.innerHTML = orders.map(o => `
+    <tr>
+      <td>#${o._id.slice(-6)}</td>
+      <td>${o.user?.name || "-"}</td>
+      <td>${o.user?.phone || "-"}</td>
+      <td>${o.address || "-"}</td>
+      <td>${Array.isArray(o.items)
+        ? o.items.map(i => `${i.qty}×${i.name}`).join(", ")
+        : "-"}</td>
+      <td>${o.paymentMethod || "-"}</td>
+      <td>${o.status || "Placed"}</td>
+    </tr>
+  `).join("");
 }
 
 fetchAdmin();
