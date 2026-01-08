@@ -1,17 +1,21 @@
 const ordersContainer = document.getElementById("ordersList");
 const token = localStorage.getItem("token");
 
+const API_URL = "https://local-food-delivery-pxqv.onrender.com";
+
 if (!token) {
   location.href = "login.html";
 }
 
 async function loadOrders() {
   try {
-    const res = await fetch("/api/orders/my", {
+    const res = await fetch(`${API_URL}/api/orders/my`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
     });
+
+    if (!res.ok) throw new Error("API failed");
 
     const orders = await res.json();
 
@@ -53,6 +57,7 @@ async function loadOrders() {
     });
 
   } catch (err) {
+    console.error(err);
     ordersContainer.innerHTML =
       "<div class='empty'>Failed to load orders</div>";
   }
