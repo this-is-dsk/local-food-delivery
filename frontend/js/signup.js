@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/api/auth";
+const API_URL = "https://local-food-delivery-pxqv.onrender.com";
 
 const signupBtn = document.getElementById("signupBtn");
 

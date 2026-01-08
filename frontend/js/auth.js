@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/api/auth";
+const API_URL = "https://local-food-delivery-pxqv.onrender.com";
 
 const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
@@ -16,11 +16,11 @@ async function login() {
   }
 
   try {
-    const res = await fetch(`${API_URL}/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password })
-    });
+    const res = await fetch(`${API_URL}/api/auth/login`, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ email, password })
+});
 
     const data = await res.json();
 

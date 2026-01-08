@@ -10,7 +10,7 @@ const placeOrderBtn = document.getElementById("placeOrder");
 const addressInput = document.getElementById("address");
 
 const DELIVERY_FEE = 50;
-const API_URL = "http://127.0.0.1:5000";
+const API_URL = "https://local-food-delivery-pxqv.onrender.com";
 
 // ---------------- CART HELPERS ----------------
 function getCart() {
