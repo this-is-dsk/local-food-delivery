@@ -67,4 +67,36 @@ router.get("/orders", authMiddleware, adminMiddleware, async (req, res) => {
   }
 });
 
+// UPDATE ORDER STATUS (ADMIN)
+router.put(
+  "/orders/:id/status",
+  authMiddleware,
+  adminMiddleware,
+  async (req, res) => {
+    try {
+      const { status } = req.body;
+
+      if (!status) {
+        return res.status(400).json({ message: "Status required" });
+      }
+
+      const order = await Order.findByIdAndUpdate(
+        req.params.id,
+        { status },
+        { new: true }
+      );
+
+      if (!order) {
+        return res.status(404).json({ message: "Order not found" });
+      }
+
+      res.json(order);
+    } catch (err) {
+      console.error("STATUS UPDATE ERROR:", err);
+      res.status(500).json({ message: "Server error" });
+    }
+  }
+);
+
+
 module.exports = router;
