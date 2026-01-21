@@ -1,4 +1,14 @@
 const API_URL = "https://local-food-delivery-pxqv.onrender.com";
+function formatDate(dateStr) {
+  const d = new Date(dateStr);
+  return d.toLocaleString("en-IN", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+}
 
 const token = localStorage.getItem("token");
 if (!token) location.href = "/login.html";
@@ -59,18 +69,19 @@ async function fetchAdmin() {
   ).then(r => r.json());
 
   ordersTable.innerHTML = orders.map(o => `
-    <tr>
-      <td>#${o._id.slice(-6)}</td>
-      <td>${o.user?.name || "-"}</td>
-      <td>${o.user?.phone || "-"}</td>
-      <td>${o.address || "-"}</td>
-      <td>${Array.isArray(o.items)
-        ? o.items.map(i => `${i.qty}×${i.name}`).join(", ")
-        : "-"}</td>
-      <td>${o.paymentMethod || "-"}</td>
-      <td>${o.status || "Placed"}</td>
-    </tr>
-  `).join("");
+  <tr>
+    <td>#${o._id.slice(-6)}</td>
+    <td>${o.user?.name || "-"}</td>
+    <td>${o.user?.phone || "-"}</td>
+    <td>${o.address || "-"}</td>
+    <td>${Array.isArray(o.items)
+      ? o.items.map(i => `${i.qty}×${i.name}`).join(", ")
+      : "-"}</td>
+    <td>${o.createdAt ? formatDate(o.createdAt) : "-"}</td> <!-- 🔥 -->
+    <td>${o.paymentMethod || "-"}</td>
+    <td>${o.status || "Placed"}</td>
+  </tr>
+`).join("");
 }
 
 fetchAdmin();
