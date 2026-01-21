@@ -24,5 +24,5 @@ const orderSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-
+const date = new Date(order.createdAt).toLocaleString();
 module.exports = mongoose.model("Order", orderSchema);
