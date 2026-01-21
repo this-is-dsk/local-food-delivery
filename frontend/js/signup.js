@@ -1,7 +1,6 @@
 const API_URL = "https://local-food-delivery-pxqv.onrender.com";
 
 const signupBtn = document.getElementById("signupBtn");
-
 signupBtn.addEventListener("click", signup);
 
 async function signup() {
@@ -29,7 +28,7 @@ async function signup() {
       return;
     }
 
-    // 🔥 AUTO LOGIN AFTER SIGNUP
+    // ✅ AUTO LOGIN (correct endpoint)
     await autoLogin(email, password);
 
   } catch (err) {
@@ -38,7 +37,7 @@ async function signup() {
 }
 
 async function autoLogin(email, password) {
-  const res = await fetch(`${API_URL}/login`, {
+  const res = await fetch(`${API_URL}/api/auth/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password })
