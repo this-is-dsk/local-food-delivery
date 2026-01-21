@@ -1,4 +1,15 @@
 const API_URL = "https://local-food-delivery-pxqv.onrender.com";
+async function updateStatus(orderId, status) {
+  await fetch(`${API_URL}/api/admin/orders/${orderId}/status`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify({ status })
+  });
+}
+
 function formatDate(dateStr) {
   const d = new Date(dateStr);
   return d.toLocaleString("en-IN", {
@@ -79,7 +90,17 @@ async function fetchAdmin() {
       : "-"}</td>
     <td>${o.createdAt ? formatDate(o.createdAt) : "-"}</td> <!-- 🔥 -->
     <td>${o.paymentMethod || "-"}</td>
-    <td>${o.status || "Placed"}</td>
+    <td>
+  <select
+    onchange="updateStatus('${o._id}', this.value)"
+  >
+    <option ${o.status==="Placed"?"selected":""}>Placed</option>
+    <option ${o.status==="Preparing"?"selected":""}>Preparing</option>
+    <option ${o.status==="Delivered"?"selected":""}>Delivered</option>
+    <option ${o.status==="Cancelled"?"selected":""}>Cancelled</option>
+  </select>
+</td>
+
   </tr>
 `).join("");
 }
